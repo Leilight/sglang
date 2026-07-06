@@ -271,8 +271,8 @@ def initialize_moe_config(server_args: ServerArgs):
     global DISABLE_FLASHINFER_CUTLASS_MOE_FP4_ALLGATHER
     global MOE_QUANTIZATION
 
-    MOE_A2A_BACKEND = MoeA2ABackend(server_args.moe_a2a_backend)
-    MOE_RUNNER_BACKEND = MoeRunnerBackend(server_args.moe_runner_backend)
+    MOE_A2A_BACKEND = MoeA2ABackend(get_flags().moe_a2a_backend)
+    MOE_RUNNER_BACKEND = MoeRunnerBackend(get_flags().moe.runner_backend)
     SPECULATIVE_MOE_RUNNER_BACKEND = (
         MoeRunnerBackend(get_flags().speculative_moe_runner_backend)
         if get_flags().speculative_moe_runner_backend is not None

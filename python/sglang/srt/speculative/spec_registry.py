@@ -93,9 +93,12 @@ class CustomSpecAlgo:
         pass
 
     def create_worker(self, server_args: ServerArgs) -> Type:
-        from sglang.srt.runtime_context import get_flags
+        from sglang.srt.arg_groups.overrides import resolved_view
 
-        if not get_flags().disable_overlap_schedule and not self.supports_overlap:
+        if (
+            not resolved_view(server_args).disable_overlap_schedule
+            and not self.supports_overlap
+        ):
             raise ValueError(
                 f"Speculative algorithm {self.name} does not support overlap scheduling."
             )

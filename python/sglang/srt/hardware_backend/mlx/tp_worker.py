@@ -27,6 +27,7 @@ from sglang.srt.managers.schedule_batch import ScheduleBatch
 from sglang.srt.managers.tp_worker import TpModelWorker
 from sglang.srt.managers.utils import GenerationBatchResult
 from sglang.srt.model_executor.forward_batch_info import ForwardBatch, PPProxyTensors
+from sglang.srt.runtime_context import get_flags
 
 logger = logging.getLogger(__name__)
 
@@ -53,7 +54,7 @@ class MlxTpModelWorker(TpModelWorker):
             trust_remote_code=self.server_args.trust_remote_code,
             disable_radix_cache=self.server_args.disable_radix_cache,
             mem_fraction_static=self.server_args.mem_fraction_static,
-            quantization=self.server_args.quantization,
+            quantization=get_flags().quantization,
         )
         if self.server_args.max_total_tokens is not None:
             init_kwargs["pool_size"] = self.server_args.max_total_tokens

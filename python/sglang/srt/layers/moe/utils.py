@@ -296,7 +296,7 @@ def initialize_moe_config(server_args: ServerArgs):
     DISABLE_FLASHINFER_CUTLASS_MOE_FP4_ALLGATHER = (
         server_args.disable_flashinfer_cutlass_moe_fp4_allgather
     )
-    MOE_QUANTIZATION = server_args.quantization
+    MOE_QUANTIZATION = get_flags().quantization
 
 
 def get_moe_a2a_backend() -> MoeA2ABackend:

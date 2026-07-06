@@ -33,6 +33,7 @@ from sglang.srt.layers.quantization.fp8_kernel import (
     w8a8_block_fp8_matmul_deepgemm,
     w8a8_block_fp8_matmul_triton,
 )
+from sglang.srt.runtime_context import get_flags
 from sglang.srt.server_args import get_global_server_args
 from sglang.srt.utils import (
     ceil_align,
@@ -535,7 +536,7 @@ def initialize_fp8_gemm_config(server_args: ServerArgs) -> None:
 
     if (
         backend.is_auto()
-        and server_args.quantization == "mxfp8"
+        and get_flags().quantization == "mxfp8"
         and _is_sm100_supported
         and is_flashinfer_available()
     ):
